@@ -1,0 +1,137 @@
+/* Enable smooth scrolling by default (to be removed in reduced-motion query) */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #dedede;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p {
+   font-size: 20px;
+   text-align: center;
+   line-height: 1.5;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+/* =========================================
+   MOBILE VIEW (Mobile-First Approach)
+   Layout: 1 Column Grid with 10px gap
+========================================= */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px; /* 10px gap between rows and columns */
+}
+
+figure {
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #888888;
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* =========================================
+   TABLET VIEW
+   Triggers at 772px
+========================================= */
+@media screen and (min-width: 772px) {
+    .grid {
+        grid-template-columns: 1fr 1fr; /* Two column grid */
+    }
+
+    figure {
+        border-radius: 50%; /* Create a circular shape */
+        aspect-ratio: 1 / 1; /* Forces a perfect circle */
+        overflow: hidden;
+    }
+
+    /* Set the last figure to take up both columns */
+    figure:last-child {
+        grid-column: 1 / -1; 
+    }
+}
+
+/* =========================================
+   LARGE SCREEN VIEW
+   Triggers at 992px
+========================================= */
+@media screen and (min-width: 992px) {
+    figure {
+        border-radius: 0; /* Remove border radius from all figures */
+        aspect-ratio: auto; /* Reset aspect ratio for normal squares/rectangles */
+    }
+
+    /* Reset the last-child from the tablet view so it doesn't conflict */
+    figure:last-child {
+        grid-column: auto; 
+    }
+
+    /* Set every third figure to take up both columns */
+    figure:nth-child(3n) {
+        grid-column: 1 / -1; 
+    }
+}
+
+/* =========================================
+   USER PREFERENCE: REDUCED MOTION
+========================================= */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto; /* Remove the scroll behavior */
+    }
+}
+
+/* =========================================
+   USER PREFERENCE: COLOR SCHEME (DARK MODE)
+========================================= */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+    }
+    
+    h1, p, a {
+        color: #f1f1f1; /* Make standard text readable on dark background */
+    }
+
+    figure {
+        background-color: #333333; /* Dark color for figures */
+        color: #ffea75; /* Lighter yellow-ish font color */
+        border-color: #000000; /* Black border */
+    }
+}
